@@ -6,12 +6,10 @@ services:
     region: oregon
     plan: free
     buildCommand: pip install -r requirements.txt && python -m src.train
-    startCommand: python run.py --server
+    startCommand: uvicorn backend.app:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
-      - key: HOST
-        value: 0.0.0.0
 
   # Option 2: Streamlit Analytical Dashboard (Optional separate service)
   # - type: web

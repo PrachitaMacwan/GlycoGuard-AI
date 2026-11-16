@@ -132,7 +132,7 @@ def compute_local_explanations(patient_dict: dict) -> List[FeatureComparison]:
 
 # --- API Endpoints ---
 
-@app.get("/api/health")
+@app.api_route("/api/health", methods=["GET", "HEAD"])
 def health_check():
     return {
         "status": "healthy",
@@ -295,6 +295,6 @@ async def batch_predict_csv(file: UploadFile = File(...)):
 if os.path.exists(FRONTEND_DIR):
     app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 
-    @app.get("/")
+    @app.api_route("/", methods=["GET", "HEAD"])
     def serve_frontend():
         return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
